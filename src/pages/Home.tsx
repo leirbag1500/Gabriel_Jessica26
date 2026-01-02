@@ -11,7 +11,7 @@ const Home = () => {
 
     <main className="min-h-screen bg-floral-pattern pt-20">
       {/* Logo Section - Outside the background image */}
-      <div className="py-8 text-center bg-background/50 backdrop-blur-sm sticky top-0 z-50 shadow-sm border-b border-white/20 transition-all duration-300">
+      <div className="py-8 text-center bg-background/50 backdrop-blur-sm shadow-sm border-b border-white/20 transition-all duration-300">
         <div className="">
           <img
             src={logo}
