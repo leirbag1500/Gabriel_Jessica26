@@ -147,7 +147,7 @@ const Gifts = () => {
       setCopied(true);
       toast({
         title: "Chave PIX copiada! 💕",
-        description: "Confira os dados para transferência.",
+        description: "Confira os dados e lembre-se de preencher suas informações e anexar o comprovante!",
       });
       setTimeout(() => setCopied(false), 3000);
     } catch {
@@ -450,6 +450,7 @@ const Gifts = () => {
                       ))}
                       {totalRaffleNumbers > 5 && <span className="text-primary/40 text-xs">+</span>}
                     </div>
+                    <p className="text-xs text-primary/70 mt-3 font-medium">Os números serão escolhidos na festa</p>
                   </div>
                 )}
 
