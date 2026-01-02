@@ -287,138 +287,142 @@ const Gifts = () => {
 
         {/* Pix Dialog */}
         <Dialog open={showPixDialog} onOpenChange={(open) => !open && resetDialog()}>
-          <DialogContent className="sm:max-w-md max-h-[90vh] overflow-y-auto">
+          <DialogContent className="sm:max-w-4xl max-h-[90vh] overflow-y-auto">
             {!showSuccess ? (
               <>
-                <DialogHeader>
-                  <DialogTitle>Finalizar Contribuição</DialogTitle>
-                  <DialogDescription>
-                    A chave Pix foi copiada! Confira o resumo e envie o comprovante.
+                <DialogHeader className="mb-4">
+                  <DialogTitle className="text-2xl font-serif text-center sm:text-left">Finalizar Contribuição</DialogTitle>
+                  <DialogDescription className="text-center sm:text-left">
+                    Seus presentes ajudam a construir nosso sonho!
                   </DialogDescription>
                 </DialogHeader>
 
-                {/* Order Summary */}
-                <div className="my-4 space-y-3">
-                  <h4 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Resumo do Pedido</h4>
-                  <div className="bg-secondary/30 rounded-lg p-4 space-y-2">
-                    {Object.entries(selectedTickets).map(([id, qty]) => {
-                      const t = tickets.find(t => t.id === id);
-                      if (!t) return null;
-                      return (
-                        <div key={id} className="flex justify-between text-sm">
-                          <span>{qty}x {t.name}</span>
-                          <span className="font-mono">R$ {t.price * qty},00</span>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                  {/* Left Column: Summary & Personal Data */}
+                  <div className="space-y-6">
+                    {/* Order Summary */}
+                    <div className="bg-secondary/30 rounded-xl p-4 space-y-3 border border-border/50">
+                      <h4 className="text-sm font-bold text-muted-foreground uppercase tracking-wider flex items-center gap-2">
+                        <ShoppingBag className="w-4 h-4" />
+                        Resumo do Pedido
+                      </h4>
+                      <div className="space-y-2 max-h-[150px] overflow-y-auto pr-2 custom-scrollbar">
+                        {Object.entries(selectedTickets).map(([id, qty]) => {
+                          const t = tickets.find(t => t.id === id);
+                          if (!t) return null;
+                          return (
+                            <div key={id} className="flex justify-between text-sm py-1 border-b border-border/30 last:border-0">
+                              <span className="text-foreground/90">{qty}x {t.name}</span>
+                              <span className="font-mono text-foreground">R$ {t.price * qty},00</span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                      <div className="border-t border-border pt-3 flex justify-between items-center">
+                        <span className="font-medium text-foreground">Total</span>
+                        <span className="text-xl font-bold text-primary">R$ {totalValue},00</span>
+                      </div>
+                    </div>
+
+                    {totalRaffleNumbers > 0 && (
+                      <div className="bg-primary/5 border border-primary/20 rounded-xl p-4 flex items-center gap-3 animate-pulse-gentle">
+                        <div className="bg-primary/20 p-2 rounded-full">
+                          <Sparkles className="w-5 h-5 text-primary" />
                         </div>
-                      );
-                    })}
-                    <div className="border-t border-border/50 my-2 pt-2 flex justify-between font-bold">
-                      <span>Total</span>
-                      <span>R$ {totalValue},00</span>
+                        <p className="text-sm text-foreground/80 font-medium">
+                          Você garantiu <span className="font-bold text-primary text-lg mx-1">{totalRaffleNumbers}</span> {totalRaffleNumbers === 1 ? "número" : "números"} da sorte!
+                        </p>
+                      </div>
+                    )}
+
+                    <div className="space-y-4">
+                      <h4 className="text-sm font-bold text-muted-foreground uppercase tracking-wider">Seus Dados</h4>
+                      <div className="space-y-3">
+                        <div className="space-y-1">
+                          <Label htmlFor="name">Nome Completo</Label>
+                          <Input
+                            id="name"
+                            placeholder="Ex: Gabriel Silva"
+                            value={guestName}
+                            onChange={(e) => setGuestName(e.target.value)}
+                            className="bg-background/50"
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <Label htmlFor="email">Email para contato</Label>
+                          <Input
+                            id="email"
+                            type="email"
+                            placeholder="Ex: gabriel@email.com"
+                            value={guestEmail}
+                            onChange={(e) => setGuestEmail(e.target.value)}
+                            className="bg-background/50"
+                          />
+                        </div>
+                      </div>
                     </div>
                   </div>
 
-                  {totalRaffleNumbers > 0 && (
-                    <div className="bg-primary/10 rounded-lg p-3 flex items-center gap-3">
-                      <Sparkles className="w-5 h-5 text-primary" />
-                      <p className="text-sm text-primary font-medium">
-                        Você garantiu <span className="font-bold text-lg">{totalRaffleNumbers}</span> números para o sorteio!
-                      </p>
+                  {/* Right Column: Payment & Confirmation */}
+                  <div className="space-y-6 lg:border-l lg:pl-8 border-border/50">
+                    <div className="bg-white rounded-xl p-6 shadow-sm border border-border/50 text-center">
+                      <p className="text-sm font-medium text-muted-foreground mb-4">Escaneie o QR Code</p>
+                      <img
+                        src={pixQrCode}
+                        alt="QR Code Pix"
+                        className="w-48 h-48 object-contain mx-auto mb-4"
+                      />
+                      <div className="bg-secondary/50 rounded-lg p-3 flex flex-col gap-2">
+                        <p className="text-xs text-muted-foreground font-mono break-all">{pixKey}</p>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="w-full gap-2 border-primary/20 text-primary hover:bg-primary/5"
+                          onClick={handleCopyPix}
+                        >
+                          {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                          {copied ? "Copiado!" : "Copiar Chave Pix"}
+                        </Button>
+                      </div>
                     </div>
-                  )}
-                </div>
 
-                <div className="grid gap-4 py-2">
-                  <div className="grid gap-2">
-                    <Label htmlFor="name">Seu Nome</Label>
-                    <Input
-                      id="name"
-                      placeholder="Ex: João Silva"
-                      value={guestName}
-                      onChange={(e) => setGuestName(e.target.value)}
-                    />
-                  </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor="email">Seu Email</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="Ex: joao@email.com"
-                      value={guestEmail}
-                      onChange={(e) => setGuestEmail(e.target.value)}
-                    />
-                  </div>
-                </div>
-
-                {/* QR Code */}
-                <div className="flex justify-center mb-4">
-                  <div className="bg-white p-4 rounded-lg shadow-md">
-                    <img
-                      src={pixQrCode}
-                      alt="QR Code Pix"
-                      className="w-48 h-48 object-contain"
-                    />
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-2">
-                  <div className="grid flex-1 gap-2">
-                    <div className="p-4 bg-secondary/50 rounded-lg space-y-3 border border-border/50">
-                      <div>
-                        <p className="text-sm font-medium text-muted-foreground">Chave Pix</p>
-                        <div className="flex items-center gap-2">
-                          <p className="text-base text-foreground font-mono break-all flex-1">{pixKey}</p>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className="h-8 w-8 text-primary hover:text-primary hover:bg-primary/10"
-                            onClick={handleCopyPix}
-                            title="Copiar chave"
+                    <div className="space-y-4">
+                      <div className="space-y-1">
+                        <Label htmlFor="receipt" className="text-foreground font-medium">Comprovante de Transferência</Label>
+                        <p className="text-xs text-muted-foreground mb-2">Necessário para validar seus números da sorte</p>
+                        <div className="relative">
+                          <Input
+                            id="receipt"
+                            type="file"
+                            className="hidden"
+                            onChange={(e) => setReceiptFile(e.target.files?.[0] || null)}
+                          />
+                          <Label
+                            htmlFor="receipt"
+                            className={`flex items-center justify-center gap-2 p-4 border-2 border-dashed rounded-xl cursor-pointer transition-colors
+                              ${receiptFile ? "border-primary bg-primary/5 text-primary" : "border-border hover:border-primary/50 text-muted-foreground"}
+                            `}
                           >
-                            {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                          </Button>
+                            <Upload className="w-5 h-5" />
+                            {receiptFile ? receiptFile.name : "Clique para anexar comprovante"}
+                          </Label>
                         </div>
                       </div>
-                      <div className="grid grid-cols-2 gap-4">
-                        <div>
-                          <p className="text-sm font-medium text-muted-foreground">Beneficiário</p>
-                          <p className="text-base text-foreground font-semibold">Gabriel Francisco</p>
-                        </div>
-                        <div>
-                          <p className="text-sm font-medium text-muted-foreground">Banco</p>
-                          <p className="text-base text-foreground font-semibold">Nubank</p>
-                        </div>
-                      </div>
+
+                      <Button
+                        type="submit"
+                        size="lg"
+                        disabled={!receiptFile || !guestName || !guestEmail}
+                        className="w-full rounded-xl shadow-lg hover:shadow-xl transition-all h-12 text-base font-semibold"
+                        onClick={() => {
+                          setShowSuccess(true);
+                          toast({ title: "Comprovante enviado!", description: "Boa sorte no sorteio! 🍀" });
+                        }}
+                      >
+                        Confirmar Envio
+                      </Button>
                     </div>
                   </div>
-                </div>
-
-                <div className="grid w-full max-w-sm items-center gap-1.5 mt-4">
-                  <Label htmlFor="receipt">Enviar Comprovante (Obrigatório)</Label>
-                  <div className="flex gap-2">
-                    <Input
-                      id="receipt"
-                      type="file"
-                      className="cursor-pointer"
-                      onChange={(e) => setReceiptFile(e.target.files?.[0] || null)}
-                    />
-                    <Button
-                      type="submit"
-                      disabled={!receiptFile || !guestName || !guestEmail}
-                      className="gap-2"
-                      onClick={() => {
-                        setShowSuccess(true);
-                        toast({ title: "Comprovante enviado!", description: "Boa sorte no sorteio! 🍀" });
-                      }}
-                    >
-                      <Upload className="h-4 w-4" />
-                      Enviar
-                    </Button>
-                  </div>
-                  {(!receiptFile || !guestName || !guestEmail) && (
-                    <p className="text-[0.8rem] text-muted-foreground">
-                      Preencha nome, email e anexe o comprovante para enviar.
-                    </p>
-                  )}
                 </div>
               </>
             ) : (
