@@ -1,5 +1,5 @@
 import { FloralDivider } from "@/components/Ornament";
-import { MapPin, Clock, Church, PartyPopper, Navigation } from "lucide-react";
+import { MapPin, Clock, Church, PartyPopper, Navigation, Car, Utensils, Wine, Beer, Baby } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import churchImg from "@/assets/church.jpg";
 import receptionImg from "@/assets/reception.jpg";
@@ -162,16 +162,56 @@ const Location = () => {
         </div>
 
         {/* Additional Info */}
-        <div className="max-w-2xl mx-auto mt-8 text-center">
-          <div className="bg-primary/5 rounded-xl border border-primary/10 p-6">
-            <h3 className="font-serif text-lg text-foreground mb-2">
-              Informações Importantes
-            </h3>
-            <ul className="text-sm text-muted-foreground space-y-2">
-              <li>• Estacionamento disponível no local</li>
-              <li>• Traje: Esporte Fino</li>
-              <li>• Crianças são bem-vindas</li>
-            </ul>
+        {/* Additional Info */}
+        <div className="max-w-4xl mx-auto mt-12">
+          <h3 className="font-serif text-2xl text-foreground text-center mb-8">
+            O que te espera na festa
+          </h3>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 justify-center">
+            {/* Parking */}
+            <div className="bg-card/80 backdrop-blur-sm border border-border/50 rounded-xl p-4 flex flex-col items-center text-center gap-2 shadow-sm hover:shadow-md transition-all">
+              <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
+                <Car className="w-5 h-5 text-primary" />
+              </div>
+              <p className="font-medium text-foreground">Estacionamento</p>
+              <p className="text-xs text-muted-foreground">Gratuito no local</p>
+            </div>
+
+            {/* Food */}
+            <div className="bg-card/80 backdrop-blur-sm border border-border/50 rounded-xl p-4 flex flex-col items-center text-center gap-2 shadow-sm hover:shadow-md transition-all">
+              <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
+                <Utensils className="w-5 h-5 text-primary" />
+              </div>
+              <p className="font-medium text-foreground">Buffet</p>
+              <p className="text-xs text-muted-foreground">Comida Mineira</p>
+            </div>
+
+            {/* Drinks */}
+            <div className="bg-card/80 backdrop-blur-sm border border-border/50 rounded-xl p-4 flex flex-col items-center text-center gap-2 shadow-sm hover:shadow-md transition-all">
+              <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
+                <Wine className="w-5 h-5 text-primary" />
+              </div>
+              <p className="font-medium text-foreground">Drinks</p>
+              <p className="text-xs text-muted-foreground">Alcoólicos e Não-alcoólicos</p>
+            </div>
+
+            {/* Beer */}
+            <div className="bg-card/80 backdrop-blur-sm border border-border/50 rounded-xl p-4 flex flex-col items-center text-center gap-2 shadow-sm hover:shadow-md transition-all">
+              <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
+                <Beer className="w-5 h-5 text-primary" />
+              </div>
+              <p className="font-medium text-foreground">Cerveja</p>
+              <p className="text-xs text-muted-foreground">Gelada à vontade</p>
+            </div>
+
+            {/* Kids */}
+            <div className="bg-card/80 backdrop-blur-sm border border-border/50 rounded-xl p-4 flex flex-col items-center text-center gap-2 shadow-sm hover:shadow-md transition-all col-span-2 md:col-span-1">
+              <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
+                <Baby className="w-5 h-5 text-primary" />
+              </div>
+              <p className="font-medium text-foreground">Espaço Kids</p>
+              <p className="text-xs text-muted-foreground">Diversão para os pequenos</p>
+            </div>
           </div>
         </div>
       </div>
