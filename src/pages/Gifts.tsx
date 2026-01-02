@@ -95,6 +95,14 @@ const tickets: Ticket[] = [
     raffleNumbers: 6,
     icon: Crown,
   },
+  {
+    id: "romantic_dinner",
+    name: "Jantar Romântico",
+    description: "Uma noite inesquecível para o casal 🍷",
+    price: 220,
+    raffleNumbers: 7,
+    icon: Heart,
+  },
 ];
 
 const Gifts = () => {
