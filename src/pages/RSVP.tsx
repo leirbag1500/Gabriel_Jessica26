@@ -6,13 +6,14 @@ import homeBg from "@/assets/home-bg.jpg";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { Heart, Send, Users, MessageSquare, User } from "lucide-react";
+import { Heart, Send, Users, MessageSquare, User, Mail } from "lucide-react";
 
 const RSVP = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
+    email: "",
     guests: "1",
     message: "",
   });
@@ -29,7 +30,7 @@ const RSVP = () => {
       description: `Obrigado ${formData.name}! Estamos ansiosos para celebrar com você.`,
     });
 
-    setFormData({ name: "", guests: "1", message: "" });
+    setFormData({ name: "", email: "", guests: "1", message: "" });
     setIsSubmitting(false);
   };
 
@@ -78,6 +79,25 @@ const RSVP = () => {
                   value={formData.name}
                   onChange={(e) =>
                     setFormData({ ...formData, name: e.target.value })
+                  }
+                  required
+                  className="bg-background/50 border-border/50 focus:border-primary"
+                />
+              </div>
+
+              {/* Number of guests */}
+              <div className="space-y-2">
+                <Label htmlFor="email" className="flex items-center gap-2">
+                  <Mail className="w-4 h-4 text-primary" />
+                  Email
+                </Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="seu@email.com"
+                  value={formData.email}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
                   }
                   required
                   className="bg-background/50 border-border/50 focus:border-primary"
