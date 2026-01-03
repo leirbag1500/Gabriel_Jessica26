@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Ticket, X } from "lucide-react";
+import { Ticket } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 
@@ -30,12 +30,6 @@ export const RaffleBanner = () => {
                 <div className="flex-1 space-y-2">
                     <div className="flex justify-between items-start">
                         <h4 className="font-serif font-bold text-foreground">Sorteio na Festa!</h4>
-                        <button
-                            onClick={() => setIsDismissed(true)}
-                            className="text-muted-foreground hover:text-foreground transition-colors"
-                        >
-                            <X className="w-4 h-4" />
-                        </button>
                     </div>
                     <p className="text-sm text-muted-foreground leading-relaxed">
                         O sorteio acontecerá ao vivo durante a celebração. Garanta seus números da sorte na lista de presentes! 🍀
