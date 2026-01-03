@@ -43,7 +43,10 @@ export const RaffleBanner = () => {
                     <Button
                         size="sm"
                         className="w-full bg-primary/90 hover:bg-primary text-primary-foreground shadow-sm"
-                        onClick={() => navigate("/presentes")}
+                        onClick={() => {
+                            setIsDismissed(true);
+                            navigate("/presentes");
+                        }}
                     >
                         Ver Lista de Presentes
                     </Button>
