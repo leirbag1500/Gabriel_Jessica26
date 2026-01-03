@@ -14,12 +14,15 @@ import { Layout } from "./components/Layout";
 
 const queryClient = new QueryClient();
 
+import { ScrollToTop } from "./components/ScrollToTop";
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
