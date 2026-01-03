@@ -15,6 +15,11 @@ import gallery10 from "@/assets/gallery-10.jpg";
 import casal1 from "@/assets/casal-1.jpg";
 import casal2 from "@/assets/casal-2.jpg";
 
+import casal3 from "@/assets/casal-3.jpg";
+import casal4 from "@/assets/casal-4.jpg";
+import casal5 from "@/assets/casal-5.jpg";
+import casal6 from "@/assets/casal-6.png";
+
 // Church and ceremony photos
 const galleryImages = [
   { id: 1, src: gallery1, alt: "Paróquia Santo Cura D'Ars - Fachada", category: "Cerimônia" },
@@ -29,6 +34,10 @@ const galleryImages = [
   { id: 10, src: gallery10, alt: "Entrada da Recepção", category: "Local" },
   { id: 11, src: casal1, alt: "O Casal", category: "Casal" },
   { id: 12, src: casal2, alt: "O Casal", category: "Casal" },
+  { id: 13, src: casal3, alt: "O Casal", category: "Casal" },
+  { id: 14, src: casal4, alt: "O Casal", category: "Casal" },
+  { id: 15, src: casal5, alt: "O Casal", category: "Casal" },
+  { id: 16, src: casal6, alt: "O Casal", category: "Casal" },
 ];
 
 const categories = ["Todas", "Casal", "Local", "Cerimônia", "Decoração"];
