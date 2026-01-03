@@ -12,6 +12,7 @@ import gallery7 from "@/assets/gallery-7.jpg";
 import gallery8 from "@/assets/gallery-8.jpg";
 import gallery9 from "@/assets/gallery-9.jpg";
 import gallery10 from "@/assets/gallery-10.jpg";
+import casal1 from "@/assets/casal-1.jpg";
 
 // Church and ceremony photos
 const galleryImages = [
@@ -25,6 +26,7 @@ const galleryImages = [
   { id: 8, src: gallery8, alt: "Decoração da Recepção", category: "Local" },
   { id: 9, src: gallery9, alt: "Salão de Festas", category: "Local" },
   { id: 10, src: gallery10, alt: "Entrada da Recepção", category: "Local" },
+  { id: 11, src: casal1, alt: "O Casal", category: "Casal" },
 ];
 
 const categories = ["Todas", "Casal", "Local", "Cerimônia", "Decoração"];
