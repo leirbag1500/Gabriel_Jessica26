@@ -22,16 +22,35 @@ const RSVP = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      const response = await fetch("https://n8n.leirbag1500.lat/webhook/confirmacaoPresenca", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
-    toast({
-      title: "Presença Confirmada! 💕",
-      description: `Obrigado ${formData.name}! Estamos ansiosos para celebrar com você.`,
-    });
+      if (!response.ok) {
+        throw new Error("Falha ao enviar confirmação");
+      }
 
-    setFormData({ name: "", email: "", guests: "1", message: "" });
-    setIsSubmitting(false);
+      toast({
+        title: "Presença Confirmada! 💕",
+        description: `Obrigado ${formData.name}! Estamos ansiosos para celebrar com você.`,
+      });
+
+      setFormData({ name: "", email: "", guests: "1", message: "" });
+    } catch (error) {
+      console.error("Erro ao enviar RSVP:", error);
+      toast({
+        title: "Erro ao enviar",
+        description: "Houve um problema ao confirmar sua presença. Tente novamente ou nos avise pelo WhatsApp.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
