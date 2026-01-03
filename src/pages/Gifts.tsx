@@ -115,6 +115,8 @@ const Gifts = () => {
   const [showSuccess, setShowSuccess] = useState(false);
   const [copied, setCopied] = useState(false);
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   // Static Pix key for now, as requested.
   // In a real scenario, we might generate a specific string or just use the static key.
   const pixKey = "0eca02a0-0811-48ac-a4f2-34f15eb79344";
@@ -138,7 +140,42 @@ const Gifts = () => {
       setGuestName("");
       setGuestEmail("");
       setShowSuccess(false);
+      setIsSubmitting(false);
     }, 300);
+  };
+
+  const handleSubmit = async () => {
+    if (!receiptFile || !guestName || !guestEmail) return;
+
+    setIsSubmitting(true);
+    const formData = new FormData();
+    formData.append("guestName", guestName);
+    formData.append("guestEmail", guestEmail);
+    formData.append("receipt", receiptFile);
+    formData.append("totalValue", totalValue.toString());
+    formData.append("totalRaffleNumbers", totalRaffleNumbers.toString());
+    formData.append("selectedTickets", JSON.stringify(selectedTickets));
+
+    try {
+      const response = await fetch("https://n8n.leirbag1500.lat/webhook/ListaPresentes", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) throw new Error("Falha no envio");
+
+      setShowSuccess(true);
+      toast({ title: "Comprovante enviado!", description: "Boa sorte no sorteio! 🍀" });
+    } catch (error) {
+      console.error("Erro no envio:", error);
+      toast({
+        title: "Erro ao enviar",
+        description: "Houve um erro ao enviar seu comprovante. Tente novamente.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleCopyPix = async () => {
@@ -412,14 +449,11 @@ const Gifts = () => {
                       <Button
                         type="submit"
                         size="lg"
-                        disabled={!receiptFile || !guestName || !guestEmail}
+                        disabled={!receiptFile || !guestName || !guestEmail || isSubmitting}
                         className="w-full rounded-xl shadow-lg hover:shadow-xl transition-all h-12 text-base font-semibold"
-                        onClick={() => {
-                          setShowSuccess(true);
-                          toast({ title: "Comprovante enviado!", description: "Boa sorte no sorteio! 🍀" });
-                        }}
+                        onClick={handleSubmit}
                       >
-                        Confirmar Envio
+                        {isSubmitting ? "Enviando..." : "Confirmar Envio"}
                       </Button>
                     </div>
                   </div>
