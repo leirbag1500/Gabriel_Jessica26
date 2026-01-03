@@ -3,10 +3,9 @@ import { FloralDivider } from "@/components/Ornament";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import homeBg from "@/assets/home-bg.jpg";
-import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { Heart, Send, Users, MessageSquare, User, Mail } from "lucide-react";
+import { Heart, Send, User, Mail, Plus, Trash2 } from "lucide-react";
 
 const RSVP = () => {
   const { toast } = useToast();
@@ -14,13 +13,37 @@ const RSVP = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    guests: "1",
-    message: "",
   });
+  const [guestNames, setGuestNames] = useState<string[]>([]);
+
+  const handleAddGuest = () => {
+    setGuestNames([...guestNames, ""]);
+  };
+
+  const handleRemoveGuest = (index: number) => {
+    const newGuestNames = guestNames.filter((_, i) => i !== index);
+    setGuestNames(newGuestNames);
+  };
+
+  const handleGuestNameChange = (index: number, value: string) => {
+    const newGuestNames = [...guestNames];
+    newGuestNames[index] = value;
+    setGuestNames(newGuestNames);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+
+    const filledGuestNames = guestNames.filter(name => name.trim() !== "");
+    const guestsCount = 1 + filledGuestNames.length;
+    const message = filledGuestNames.join("; ");
+
+    const payload = {
+      ...formData,
+      guests: guestsCount.toString(),
+      message: message,
+    };
 
     try {
       const response = await fetch("https://n8n.leirbag1500.lat/webhook/confirmacaoPresenca", {
@@ -28,7 +51,7 @@ const RSVP = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       });
 
       if (!response.ok) {
@@ -40,7 +63,8 @@ const RSVP = () => {
         description: `Obrigado ${formData.name}! Estamos ansiosos para celebrar com você.`,
       });
 
-      setFormData({ name: "", email: "", guests: "1", message: "" });
+      setFormData({ name: "", email: "" });
+      setGuestNames([]);
     } catch (error) {
       console.error("Erro ao enviar RSVP:", error);
       toast({
@@ -89,7 +113,7 @@ const RSVP = () => {
               <div className="space-y-2 group">
                 <Label htmlFor="name" className="flex items-center gap-2 group-focus-within:text-primary transition-colors">
                   <User className="w-4 h-4 text-primary group-focus-within:scale-110 transition-transform" />
-                  Nome Completo
+                  Nome Completo (Seu)
                 </Label>
                 <Input
                   id="name"
@@ -123,44 +147,54 @@ const RSVP = () => {
                 />
               </div>
 
-              {/* Number of guests */}
-              <div className="space-y-2 group">
-                <Label htmlFor="guests" className="flex items-center gap-2 group-focus-within:text-primary transition-colors">
-                  <Users className="w-4 h-4 text-primary group-focus-within:scale-110 transition-transform" />
-                  Quantas pessoas (incluindo você)
-                </Label>
-                <select
-                  id="guests"
-                  value={formData.guests}
-                  onChange={(e) =>
-                    setFormData({ ...formData, guests: e.target.value })
-                  }
-                  className="w-full h-11 px-3 py-2 bg-white/50 border border-input rounded-md text-foreground transition-all duration-300 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary focus:bg-white"
-                >
-                  {[1, 2, 3, 4, 5].map((num) => (
-                    <option key={num} value={num}>
-                      {num} {num === 1 ? "pessoa" : "pessoas"}
-                    </option>
-                  ))}
-                </select>
+              {/* Guests List */}
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <Label className="flex items-center gap-2 text-primary font-semibold">
+                    Acompanhantes
+                  </Label>
+                  <Button
+                    type="button"
+                    onClick={handleAddGuest}
+                    variant="outline"
+                    size="sm"
+                    className="h-8 border-primary/50 text-primary hover:bg-primary/10"
+                  >
+                    <Plus className="w-4 h-4 mr-1" />
+                    Adicionar Acompanhante
+                  </Button>
+                </div>
+
+                {guestNames.map((guest, index) => (
+                  <div key={index} className="flex gap-2 animate-in fade-in slide-in-from-left-4 duration-300">
+                    <Input
+                      placeholder={`Nome do acompanhante ${index + 1}`}
+                      value={guest}
+                      onChange={(e) => handleGuestNameChange(index, e.target.value)}
+                      className="bg-white/50 border-input focus:border-primary h-10"
+                    />
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => handleRemoveGuest(index)}
+                      className="h-10 w-10 text-muted-foreground hover:text-destructive hover:bg-destructive/10"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </Button>
+                  </div>
+                ))}
+
+                {guestNames.length === 0 && (
+                  <p className="text-sm text-muted-foreground italic text-center py-2 bg-white/30 rounded-lg border border-dashed border-primary/20">
+                    Clique em adicionar se for levar acompanhantes
+                  </p>
+                )}
               </div>
 
-              {/* Message */}
-              <div className="space-y-2 group">
-                <Label htmlFor="message" className="flex items-center gap-2 group-focus-within:text-primary transition-colors">
-                  <MessageSquare className="w-4 h-4 text-primary group-focus-within:scale-110 transition-transform" />
-                  Mensagem para os noivos (opcional)
-                </Label>
-                <Textarea
-                  id="message"
-                  placeholder="Deixe uma mensagem carinhosa..."
-                  value={formData.message}
-                  onChange={(e) =>
-                    setFormData({ ...formData, message: e.target.value })
-                  }
-                  rows={4}
-                  className="bg-white/50 border-input transition-all duration-300 focus:border-primary focus:ring-1 focus:ring-primary focus:bg-white resize-none"
-                />
+              {/* Summary */}
+              <div className="text-sm text-center text-muted-foreground bg-primary/5 rounded-lg p-3 border border-primary/10">
+                Total de pessoas confirmadas: <span className="font-bold text-primary">{1 + guestNames.length}</span>
               </div>
 
               {/* Submit Button */}
