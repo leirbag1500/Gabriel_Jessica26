@@ -28,7 +28,7 @@ const galleryImages = [
   { id: 4, src: gallery4, alt: "Teto da Igreja", category: "Cerimônia" },
   { id: 5, src: gallery5, alt: "Altar da Igreja", category: "Cerimônia" },
   { id: 6, src: gallery6, alt: "Rancho Coração Caipira - Piscina", category: "Local" },
-  { id: 7, src: gallery7, alt: "Rancho Coração Caipira - Vista Aérea", category: "Local" },
+  { id: 7, src: gallery7, alt: "Rancho Coração Caipira - Salão", category: "Local" },
   { id: 8, src: gallery8, alt: "Decoração da Recepção", category: "Local" },
   { id: 9, src: gallery9, alt: "Salão de Festas", category: "Local" },
   { id: 10, src: gallery10, alt: "Entrada da Recepção", category: "Local" },
