@@ -63,8 +63,8 @@ const Gallery = () => {
       <main className="min-h-screen bg-floral-pattern pt-24 pb-16">
         <div className="container mx-auto px-4">
           {/* Header */}
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <Camera className="w-8 h-8 text-primary mx-auto mb-4" />
+          <div className="text-center max-w-2xl mx-auto mb-12 animate-in fade-in slide-in-from-bottom-8 duration-700">
+            <Camera className="w-8 h-8 text-primary mx-auto mb-4 animate-bounce" />
             <h1 className="font-serif text-4xl sm:text-5xl text-foreground mb-4">
               Nossa Galeria
             </h1>
@@ -75,16 +75,16 @@ const Gallery = () => {
           </div>
 
           {/* Category Filter */}
-          <div className="flex flex-wrap justify-center gap-2 mb-8">
+          <div className="flex flex-wrap justify-center gap-2 mb-12 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-200">
             {categories.map((category) => (
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
                 className={cn(
-                  "px-4 py-2 rounded-full text-sm font-medium transition-all duration-300",
+                  "px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105 active:scale-95",
                   selectedCategory === category
-                    ? "bg-primary text-primary-foreground shadow-md"
-                    : "bg-secondary/50 text-muted-foreground hover:bg-secondary hover:text-foreground"
+                    ? "bg-primary text-primary-foreground shadow-lg scale-105"
+                    : "bg-white/80 backdrop-blur-sm text-muted-foreground hover:bg-white hover:text-foreground hover:shadow-md border border-transparent hover:border-border/50"
                 )}
               >
                 {category}
@@ -93,55 +93,65 @@ const Gallery = () => {
           </div>
 
           {/* Gallery Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
             {filteredImages.map((image, index) => (
               <div
                 key={image.id}
                 onClick={() => openLightbox(index)}
-                className="group relative aspect-square overflow-hidden rounded-xl cursor-pointer hover-lift bg-secondary/50"
+                className="group relative aspect-square overflow-hidden rounded-2xl cursor-pointer bg-white/50 animate-in fade-in zoom-in-95 duration-500 fill-mode-both shadow-md hover:shadow-xl transition-all duration-300"
+                style={{ animationDelay: `${index * 50}ms` }}
               >
                 <img
                   src={image.src}
                   alt={image.alt}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 {/* Overlay */}
-                <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/20 transition-colors duration-300 flex items-center justify-center">
-                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="w-12 h-12 bg-background/80 backdrop-blur-sm rounded-full flex items-center justify-center">
-                      <Camera className="w-5 h-5 text-primary" />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
+                  <div className="opacity-0 group-hover:opacity-100 transform scale-50 group-hover:scale-100 transition-all duration-300 delay-75">
+                    <div className="w-14 h-14 bg-white/20 backdrop-blur-md border border-white/30 rounded-full flex items-center justify-center shadow-lg hover:bg-white/30 transition-colors">
+                      <Camera className="w-6 h-6 text-white" />
                     </div>
                   </div>
                 </div>
                 {/* Category badge */}
-                <span className="absolute bottom-2 left-2 px-2 py-1 bg-background/80 backdrop-blur-sm rounded-full text-xs text-foreground">
-                  {image.category}
-                </span>
+                <div className="absolute bottom-3 left-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-2 group-hover:translate-y-0 delay-100">
+                  <span className="px-3 py-1.5 bg-black/50 backdrop-blur-md border border-white/10 rounded-full text-xs font-medium text-white">
+                    {image.category}
+                  </span>
+                </div>
               </div>
             ))}
           </div>
 
-          {/* Empty state message */}
-          <div className="text-center mt-12 p-8 bg-secondary/30 rounded-2xl border border-border/50">
-            <p className="text-muted-foreground">
-              🎉 Em breve adicionaremos mais fotos!
-            </p>
-          </div>
+          {/* Empty state message using filteredImages length check if needed, 
+              but keeping static as requested by original code structure if logic allows,
+              or improving if dynamic. The original code had it static at the bottom.
+              Let's make it conditional or just stylized. keeping it static for now but styled. */}
+          {filteredImages.length > 0 && (
+            <div className="text-center mt-16 animate-in fade-in duration-700 delay-500">
+              <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/60 backdrop-blur-sm rounded-full border border-white/20 shadow-sm">
+                <p className="text-sm text-muted-foreground">
+                  🎉 Em breve adicionaremos mais fotos!
+                </p>
+              </div>
+            </div>
+          )}
         </div>
       </main>
 
       {/* Lightbox */}
       {lightboxOpen && (
         <div
-          className="fixed inset-0 z-50 bg-foreground/95 flex items-center justify-center"
+          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex items-center justify-center animate-in fade-in duration-300"
           onClick={closeLightbox}
         >
           {/* Close button */}
           <button
             onClick={closeLightbox}
-            className="absolute top-4 right-4 p-2 text-background hover:text-primary transition-colors"
+            className="absolute top-6 right-6 p-3 bg-white/10 hover:bg-white/20 rounded-full text-white transition-all hover:scale-110 backdrop-blur-md"
           >
-            <X className="w-8 h-8" />
+            <X className="w-6 h-6" />
           </button>
 
           {/* Navigation */}
@@ -150,9 +160,9 @@ const Gallery = () => {
               e.stopPropagation();
               prevImage();
             }}
-            className="absolute left-4 p-2 text-background hover:text-primary transition-colors"
+            className="absolute left-4 md:left-8 p-3 bg-white/10 hover:bg-white/20 rounded-full text-white transition-all hover:scale-110 backdrop-blur-md hover:-translate-x-1"
           >
-            <ChevronLeft className="w-10 h-10" />
+            <ChevronLeft className="w-8 h-8" />
           </button>
 
           <button
@@ -160,22 +170,24 @@ const Gallery = () => {
               e.stopPropagation();
               nextImage();
             }}
-            className="absolute right-4 p-2 text-background hover:text-primary transition-colors"
+            className="absolute right-4 md:right-8 p-3 bg-white/10 hover:bg-white/20 rounded-full text-white transition-all hover:scale-110 backdrop-blur-md hover:translate-x-1"
           >
-            <ChevronRight className="w-10 h-10" />
+            <ChevronRight className="w-8 h-8" />
           </button>
 
           {/* Image */}
-          <img
-            src={filteredImages[currentImageIndex]?.src}
-            alt={filteredImages[currentImageIndex]?.alt}
-            className="max-w-[90vw] max-h-[80vh] object-contain rounded-lg"
+          <div
+            className="relative max-w-[90vw] max-h-[85vh] animate-in zoom-in-95 duration-300"
             onClick={(e) => e.stopPropagation()}
-          />
-
-          {/* Counter */}
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-background text-sm">
-            {currentImageIndex + 1} / {filteredImages.length}
+          >
+            <img
+              src={filteredImages[currentImageIndex]?.src}
+              alt={filteredImages[currentImageIndex]?.alt}
+              className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl ring-1 ring-white/10"
+            />
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 bg-black/50 backdrop-blur-md rounded-full text-white text-sm font-medium border border-white/10">
+              {currentImageIndex + 1} / {filteredImages.length}
+            </div>
           </div>
         </div>
       )}

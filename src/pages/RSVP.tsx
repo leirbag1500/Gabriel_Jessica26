@@ -69,8 +69,8 @@ const RSVP = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-6">
-          <Heart className="w-8 h-8 text-primary mx-auto mb-2" />
+        <div className="text-center max-w-2xl mx-auto mb-6 animate-in fade-in slide-in-from-bottom-8 duration-700">
+          <Heart className="w-8 h-8 text-primary mx-auto mb-2 animate-pulse" />
           <h1 className="font-serif text-4xl sm:text-5xl text-foreground mb-2">
             RSVP - Confirmar Presença
           </h1>
@@ -82,13 +82,13 @@ const RSVP = () => {
         </div>
 
         {/* Form Card */}
-        <div className="max-w-lg mx-auto">
-          <div className="bg-white/95 backdrop-blur-md border border-primary/20 rounded-2xl p-6 sm:p-8 shadow-2xl">
+        <div className="max-w-lg mx-auto animate-in fade-in zoom-in-95 duration-700 delay-200">
+          <div className="bg-white/95 backdrop-blur-md border border-primary/20 rounded-2xl p-6 sm:p-8 shadow-2xl hover:shadow-[0_20px_50px_rgba(0,0,0,0.12)] transition-shadow duration-500">
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Name */}
-              <div className="space-y-2">
-                <Label htmlFor="name" className="flex items-center gap-2">
-                  <User className="w-4 h-4 text-primary" />
+              <div className="space-y-2 group">
+                <Label htmlFor="name" className="flex items-center gap-2 group-focus-within:text-primary transition-colors">
+                  <User className="w-4 h-4 text-primary group-focus-within:scale-110 transition-transform" />
                   Nome Completo
                 </Label>
                 <Input
@@ -100,14 +100,14 @@ const RSVP = () => {
                     setFormData({ ...formData, name: e.target.value })
                   }
                   required
-                  className="bg-background/50 border-border/50 focus:border-primary"
+                  className="bg-white/50 border-input transition-all duration-300 focus:border-primary focus:ring-1 focus:ring-primary focus:bg-white h-11"
                 />
               </div>
 
-              {/* Number of guests */}
-              <div className="space-y-2">
-                <Label htmlFor="email" className="flex items-center gap-2">
-                  <Mail className="w-4 h-4 text-primary" />
+              {/* Email */}
+              <div className="space-y-2 group">
+                <Label htmlFor="email" className="flex items-center gap-2 group-focus-within:text-primary transition-colors">
+                  <Mail className="w-4 h-4 text-primary group-focus-within:scale-110 transition-transform" />
                   Email
                 </Label>
                 <Input
@@ -119,14 +119,14 @@ const RSVP = () => {
                     setFormData({ ...formData, email: e.target.value })
                   }
                   required
-                  className="bg-background/50 border-border/50 focus:border-primary"
+                  className="bg-white/50 border-input transition-all duration-300 focus:border-primary focus:ring-1 focus:ring-primary focus:bg-white h-11"
                 />
               </div>
 
               {/* Number of guests */}
-              <div className="space-y-2">
-                <Label htmlFor="guests" className="flex items-center gap-2">
-                  <Users className="w-4 h-4 text-primary" />
+              <div className="space-y-2 group">
+                <Label htmlFor="guests" className="flex items-center gap-2 group-focus-within:text-primary transition-colors">
+                  <Users className="w-4 h-4 text-primary group-focus-within:scale-110 transition-transform" />
                   Quantas pessoas (incluindo você)
                 </Label>
                 <select
@@ -135,7 +135,7 @@ const RSVP = () => {
                   onChange={(e) =>
                     setFormData({ ...formData, guests: e.target.value })
                   }
-                  className="w-full h-10 px-3 py-2 bg-background/50 border border-border/50 rounded-md text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                  className="w-full h-11 px-3 py-2 bg-white/50 border border-input rounded-md text-foreground transition-all duration-300 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary focus:bg-white"
                 >
                   {[1, 2, 3, 4, 5].map((num) => (
                     <option key={num} value={num}>
@@ -146,9 +146,9 @@ const RSVP = () => {
               </div>
 
               {/* Message */}
-              <div className="space-y-2">
-                <Label htmlFor="message" className="flex items-center gap-2">
-                  <MessageSquare className="w-4 h-4 text-primary" />
+              <div className="space-y-2 group">
+                <Label htmlFor="message" className="flex items-center gap-2 group-focus-within:text-primary transition-colors">
+                  <MessageSquare className="w-4 h-4 text-primary group-focus-within:scale-110 transition-transform" />
                   Mensagem para os noivos (opcional)
                 </Label>
                 <Textarea
@@ -159,7 +159,7 @@ const RSVP = () => {
                     setFormData({ ...formData, message: e.target.value })
                   }
                   rows={4}
-                  className="bg-background/50 border-border/50 focus:border-primary resize-none"
+                  className="bg-white/50 border-input transition-all duration-300 focus:border-primary focus:ring-1 focus:ring-primary focus:bg-white resize-none"
                 />
               </div>
 
@@ -167,7 +167,7 @@ const RSVP = () => {
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-6 text-base bg-primary hover:bg-primary/90 text-primary-foreground shadow-md hover:shadow-lg transition-all duration-300"
+                className="w-full py-6 text-base bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300"
               >
                 {isSubmitting ? (
                   <span className="flex items-center gap-2">
@@ -185,7 +185,7 @@ const RSVP = () => {
           </div>
 
           {/* Additional info */}
-          <p className="text-center text-sm text-muted-foreground mt-6">
+          <p className="text-center text-sm text-muted-foreground mt-8 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300">
             Dúvidas? Entre em contato conosco pelo WhatsApp
           </p>
         </div>
