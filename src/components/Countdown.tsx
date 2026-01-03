@@ -53,15 +53,15 @@ export const Countdown = () => {
           <div className="relative">
             {/* Background glow */}
             <div className="absolute inset-0 bg-primary/10 blur-xl rounded-full" />
-            
+
             {/* Main block */}
-            <div className="relative bg-card/80 backdrop-blur-sm border border-primary/20 rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 min-w-[60px] sm:min-w-[70px] md:min-w-[90px] shadow-lg">
-              <span className="block font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-primary font-semibold tabular-nums">
+            <div className="relative bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 sm:p-5 md:p-6 min-w-[70px] sm:min-w-[80px] md:min-w-[100px] shadow-2xl hover:bg-white/20 transition-all duration-300 group hover:-translate-y-1">
+              <span className="block font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white font-bold tabular-nums drop-shadow-md">
                 {String(block.value).padStart(2, "0")}
               </span>
             </div>
           </div>
-          
+
           <span className="mt-2 text-[10px] sm:text-xs md:text-sm text-muted-foreground uppercase tracking-widest">
             {block.label}
           </span>
