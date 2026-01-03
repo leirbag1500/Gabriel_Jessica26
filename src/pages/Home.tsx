@@ -22,7 +22,7 @@ const Home = () => {
       </div>
 
       {/* Hero Section */}
-      <section className="relative flex flex-col items-center justify-center px-4 py-20 overflow-hidden">
+      <section className="relative flex flex-col items-center justify-center px-4 pt-20 pb-40 overflow-hidden">
         {/* Background Image scoped to this section */}
         <div
           className="absolute inset-0 z-0"
@@ -41,7 +41,7 @@ const Home = () => {
         <div className="relative z-10 text-center max-w-5xl mx-auto">
           {/* Pre-title */}
           <p
-            className="text-sm sm:text-base text-white/90 tracking-[0.4em] uppercase mb-6 animate-in fade-in slide-in-from-bottom-4 duration-1000 font-medium drop-shadow-md"
+            className="text-sm sm:text-base text-primary tracking-[0.4em] uppercase mb-6 animate-in fade-in slide-in-from-bottom-4 duration-1000 font-medium drop-shadow-md"
             style={{ animationDelay: '0.2s' }}
           >
             VAMOS NOS CASAR
@@ -49,30 +49,30 @@ const Home = () => {
 
           {/* Names */}
           <h1
-            className="font-serif text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-white mb-8 animate-in fade-in zoom-in-95 duration-1000 drop-shadow-2xl"
+            className="font-serif text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-primary mb-8 animate-in fade-in zoom-in-95 duration-1000 drop-shadow-2xl"
             style={{ animationDelay: '0.4s' }}
           >
             <span className="inline-block hover:scale-105 transition-transform duration-500 cursor-default">Gabriel</span>
-            <span className="text-white/80 mx-4 sm:mx-6 font-light animate-pulse inline-block">&</span>
+            <span className="text-primary/80 mx-4 sm:mx-6 font-light animate-pulse inline-block">&</span>
             <span className="inline-block hover:scale-105 transition-transform duration-500 cursor-default">Jessica</span>
           </h1>
 
           {/* Ornament */}
-          <div className="mb-10 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500 text-white/80">
+          <div className="mb-10 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500 text-primary/80">
             <Ornament />
           </div>
 
           {/* Date and Location */}
           <div
-            className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12 mb-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 text-white"
+            className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12 mb-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 text-primary"
             style={{ animationDelay: '0.6s' }}
           >
-            <div className="flex items-center gap-3 backdrop-blur-sm bg-white/10 px-6 py-2 rounded-full border border-white/20 hover:bg-white/20 transition-colors">
+            <div className="flex items-center gap-3 backdrop-blur-sm bg-primary/10 px-6 py-2 rounded-full border border-primary/20 hover:bg-primary/20 transition-colors">
               <Calendar className="w-5 h-5" />
               <span className="text-base sm:text-lg tracking-widest uppercase">16.05.2026</span>
             </div>
 
-            <div className="flex items-center gap-3 backdrop-blur-sm bg-white/10 px-6 py-2 rounded-full border border-white/20 hover:bg-white/20 transition-colors">
+            <div className="flex items-center gap-3 backdrop-blur-sm bg-primary/10 px-6 py-2 rounded-full border border-primary/20 hover:bg-primary/20 transition-colors">
               <MapPin className="w-5 h-5" />
               <span className="text-base sm:text-lg tracking-widest uppercase">Campinas, SP</span>
             </div>
@@ -80,7 +80,7 @@ const Home = () => {
 
           {/* Romantic quote */}
           <p
-            className="font-serif text-xl sm:text-2xl text-white/90 italic max-w-2xl mx-auto mb-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 leading-relaxed drop-shadow-lg"
+            className="font-serif text-xl sm:text-2xl text-primary italic max-w-2xl mx-auto mb-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 leading-relaxed drop-shadow-lg"
             style={{ animationDelay: '0.8s' }}
           >
             "O amor não é olhar um para o outro, é olhar juntos na mesma direção."
@@ -115,9 +115,9 @@ const Home = () => {
         {/* Scroll indicator */}
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce duration-[2000ms] z-10">
           <div className="flex flex-col items-center gap-2 opacity-60 hover:opacity-100 transition-opacity">
-            <span className="text-[10px] uppercase tracking-[0.2em] text-white">Descubra</span>
-            <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center pt-2 backdrop-blur-sm">
-              <div className="w-1 h-2 bg-white rounded-full animate-pulse" />
+            <span className="text-[10px] uppercase tracking-[0.2em] text-primary">Descubra</span>
+            <div className="w-6 h-10 border-2 border-primary/50 rounded-full flex justify-center pt-2 backdrop-blur-sm">
+              <div className="w-1 h-2 bg-primary rounded-full animate-pulse" />
             </div>
           </div>
         </div>
