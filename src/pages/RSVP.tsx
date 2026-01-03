@@ -54,7 +54,7 @@ const RSVP = () => {
   };
 
   return (
-    <main className="min-h-screen pt-14 pb-16 relative">
+    <main className="min-h-screen pt-20 pb-16 relative">
       {/* Background Image scoped to this section */}
       <div
         className="absolute inset-0 z-0"
@@ -69,12 +69,12 @@ const RSVP = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <Heart className="w-8 h-8 text-primary mx-auto mb-4" />
-          <h1 className="font-serif text-4xl sm:text-5xl text-foreground mb-4">
-            Confirmar Presença
+        <div className="text-center max-w-2xl mx-auto mb-6">
+          <Heart className="w-8 h-8 text-primary mx-auto mb-2" />
+          <h1 className="font-serif text-4xl sm:text-5xl text-foreground mb-2">
+            RSVP - Confirmar Presença
           </h1>
-          <FloralDivider className="mb-6" />
+          <FloralDivider className="mb-4" />
           <p className="text-muted-foreground">
             Ficaremos muito felizes com sua presença neste dia tão especial.
             Por favor, confirme até 30 de abril de 2026.
@@ -83,7 +83,7 @@ const RSVP = () => {
 
         {/* Form Card */}
         <div className="max-w-lg mx-auto">
-          <div className="bg-card/80 backdrop-blur-sm border border-border/50 rounded-2xl p-6 sm:p-8 shadow-lg">
+          <div className="bg-white/95 backdrop-blur-md border border-primary/20 rounded-2xl p-6 sm:p-8 shadow-2xl">
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Name */}
               <div className="space-y-2">

@@ -23,7 +23,7 @@ export const Header = () => {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group">
-            <img src={logo} alt="G & J" className="h-10 md:h-12 w-auto transition-transform duration-300 group-hover:scale-105" />
+            <img src={logo} alt="G & J" className="h-14 md:h-16 w-auto transition-transform duration-300 group-hover:scale-105" />
             <div className="flex flex-col items-center">
               <span className="font-serif text-lg md:text-xl font-medium text-foreground tracking-wide group-hover:text-primary transition-colors leading-none">
                 Gabriel & Jessica
