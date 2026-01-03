@@ -44,8 +44,8 @@ const OurStory = () => {
     <main className="min-h-screen bg-floral-pattern pt-24 pb-16">
       <div className="container mx-auto px-4">
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <Heart className="w-8 h-8 text-primary mx-auto mb-4" />
+        <div className="text-center max-w-2xl mx-auto mb-16 animate-in fade-in slide-in-from-bottom-8 duration-700">
+          <Heart className="w-8 h-8 text-primary mx-auto mb-4 animate-pulse" />
           <h1 className="font-serif text-4xl sm:text-5xl text-foreground mb-4">
             Nossa História
           </h1>
@@ -56,10 +56,10 @@ const OurStory = () => {
         </div>
 
         {/* Timeline */}
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           <div className="relative">
             {/* Vertical line */}
-            <div className="absolute left-4 sm:left-1/2 sm:-translate-x-px top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary/20 via-primary/40 to-primary/20" />
+            <div className="absolute left-4 sm:left-1/2 sm:-translate-x-px top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary/10 via-primary/40 to-primary/10" />
 
             {/* Timeline items */}
             {timeline.map((item, index) => {
@@ -69,38 +69,45 @@ const OurStory = () => {
               return (
                 <div
                   key={item.year}
-                  className="relative mb-12 last:mb-0"
-                  style={{ animationDelay: `${index * 0.15}s` }}
+                  className="relative mb-16 last:mb-0 animate-in fade-in slide-in-from-bottom-8 duration-700 fill-mode-both"
+                  style={{ animationDelay: `${index * 0.2}s` }}
                 >
                   {/* Mobile & Desktop layout */}
                   <div
-                    className={`flex items-start gap-6 sm:gap-0 ${isEven ? "sm:flex-row" : "sm:flex-row-reverse"
+                    className={`flex items-start gap-8 sm:gap-0 ${isEven ? "sm:flex-row" : "sm:flex-row-reverse"
                       }`}
                   >
                     {/* Content */}
                     <div
-                      className={`flex-1 pl-12 sm:pl-0 ${isEven ? "sm:pr-12 sm:text-right" : "sm:pl-12 sm:text-left"
+                      className={`flex-1 pl-12 sm:pl-0 ${isEven ? "sm:pr-16 sm:text-right" : "sm:pl-16 sm:text-left"
                         }`}
                     >
                       <div
-                        className={`bg-card/80 backdrop-blur-sm border border-border/50 rounded-2xl p-6 shadow-lg hover-lift animate-fade-in ${isEven ? "sm:mr-6" : "sm:ml-6"
+                        className={`group relative bg-white/80 backdrop-blur-md border border-white/20 rounded-2xl p-6 sm:p-8 shadow-lg hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] hover:-translate-y-1 transition-all duration-500 ${isEven ? "sm:mr-0" : "sm:ml-0"
                           }`}
                       >
-                        <span className="inline-block px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium mb-3">
+                        {/* Year Badge */}
+                        <div className={`inline-flex items-center justify-center px-4 py-1.5 bg-primary/10 text-primary rounded-full text-sm font-semibold mb-4 group-hover:bg-primary group-hover:text-white transition-colors duration-300 ${isEven ? "sm:ml-auto" : ""}`}>
                           {item.year}
-                        </span>
-                        <h3 className="font-serif text-xl text-foreground mb-2">
+                        </div>
+
+                        <h3 className="font-serif text-2xl text-foreground mb-3 group-hover:text-primary transition-colors duration-300">
                           {item.title}
                         </h3>
-                        <p className="text-muted-foreground text-sm leading-relaxed">
+                        <p className="text-muted-foreground text-base leading-relaxed group-hover:text-foreground/80 transition-colors duration-300">
                           {item.description}
                         </p>
+
+                        {/* Decorative corner */}
+                        <div className={`absolute top-0 w-16 h-16 transition-opacity duration-500 opacity-0 group-hover:opacity-100 ${isEven ? "right-0 bg-gradient-to-bl" : "left-0 bg-gradient-to-br"} from-primary/5 to-transparent rounded-tr-2xl`} />
                       </div>
                     </div>
 
                     {/* Icon - center point */}
-                    <div className="absolute left-0 sm:left-1/2 sm:-translate-x-1/2 w-8 h-8 bg-primary rounded-full flex items-center justify-center shadow-lg z-10">
-                      <Icon className="w-4 h-4 text-primary-foreground" />
+                    <div className="absolute left-4 sm:left-1/2 sm:-translate-x-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white border-4 border-primary/20 rounded-full flex items-center justify-center shadow-xl z-10 transform transition-transform duration-500 hover:scale-110 hover:border-primary">
+                      <div className="w-full h-full rounded-full flex items-center justify-center bg-primary/5 group-hover:bg-primary/10">
+                        <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
+                      </div>
                     </div>
 
                     {/* Empty space for desktop layout */}
@@ -113,14 +120,16 @@ const OurStory = () => {
         </div>
 
         {/* Quote */}
-        <div className="max-w-2xl mx-auto mt-16 text-center">
-          <div className="bg-primary/5 rounded-2xl border border-primary/10 p-8">
-            <p className="font-serif text-xl text-foreground italic mb-4">
+        <div className="max-w-3xl mx-auto mt-24 text-center animate-in fade-in zoom-in-95 duration-700 delay-1000">
+          <div className="bg-white/60 backdrop-blur-sm rounded-3xl border border-white/20 p-10 sm:p-12 shadow-xl relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+            <Sparkles className="w-8 h-8 text-primary/40 mx-auto mb-6" />
+            <p className="font-serif text-2xl sm:text-3xl text-foreground italic mb-6 leading-relaxed">
               "O amor não é olhar um para o outro, é olhar juntos na mesma
               direção."
             </p>
-            <p className="text-sm text-muted-foreground">
-              — Antoine de Saint-Exupéry
+            <p className="text-base text-muted-foreground font-medium tracking-wide">
+              — ANTOINE DE SAINT-EXUPÉRY
             </p>
           </div>
         </div>
