@@ -220,7 +220,15 @@ const RSVP = () => {
 
           {/* Additional info */}
           <p className="text-center text-sm text-muted-foreground mt-8 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300">
-            Dúvidas? Entre em contato conosco pelo WhatsApp
+            Dúvidas? Entre em contato conosco pelo{" "}
+            <a
+              href="https://wa.me/5519981406528"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:underline font-semibold transition-all hover:text-primary/80"
+            >
+              WhatsApp
+            </a>
           </p>
         </div>
       </div>
